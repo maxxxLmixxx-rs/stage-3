@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const ReactRefreshBabelPlugin = require('react-refresh/babel')
+const packageJSON = require('./package.json')
 
 /**
  * @1 .browserslist css-hot fix
@@ -88,6 +89,7 @@ module.exports = {
   /*2*/ entry: './src/index.tsx',
   /*3*/ devtool: 'source-map',
   output: {
+    publicPath: packageJSON.publicPath,
     assetModuleFilename: filenames.assets,
     filename: filenames.js,
     clean: true,
