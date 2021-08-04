@@ -1,5 +1,11 @@
 body {
+    padding: 0;
     margin: 0;
-    background: lightcoral;
-    font-family: 'Courier New', Courier, monospace;
+    box-sizing: border-box;
+    min-height: 100vh;
+    border: 1px solid transparent;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: lighter;
+
+    background: center / cover url('./assets/background.svg');
 }

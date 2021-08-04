@@ -1,0 +1,34 @@
+@use 'sass:color';
+
+$base-color: #ffffff;
+$txt-color: color.adjust($base-color, $alpha: -0.15);
+$txt-color-opaque: color.adjust($base-color, $alpha: -0.75);
+
+.SearchBar {
+    font-size: 32px;
+    color: $base-color;
+
+    label {
+        font-size: 1em;
+        cursor: pointer;
+    }
+
+    .input {
+        margin-top: 10px;
+        width: 100%;
+        padding: 10px 5px;
+        box-sizing: border-box;
+        color: inherit;
+        font: inherit;
+        background: none;
+        outline: none;
+        font-size: 0.75em;
+        border: none;
+        border-bottom: 1px solid $txt-color-opaque;
+        transition: border-bottom 0.25s ease;
+
+        &:focus {
+            border-bottom: 1px solid $txt-color;
+        }
+    }
+}

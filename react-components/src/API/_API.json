@@ -1,0 +1,76 @@
+{
+  "weatherAPI": [
+    {
+      "today": {
+        "temperatureLimit": -5,
+        "chanceTo": {
+          "probability": 0.85,
+          "type": "snow",
+          "iconUrl": "./weatherAPI/snow.svg"
+        },
+        "imageUrl": "./weatherAPI/m1.jpg",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia impedit eaque fugiat blanditiis nisi reprehenderit unde aliquam, nostrum voluptatem dolorum explicabo molestias natus possimus autem magnam esse expedita quisquam itaque?"
+      }
+    },
+    {
+      "tomorrow": {
+        "temperatureLimit": -20,
+        "chanceTo": {
+          "probability": 0.53,
+          "type": "snow",
+          "iconUrl": "./weatherAPI/snow.svg"
+        },
+        "imageUrl": "./weatherAPI/m2.jpg",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia impedit eaque fugiat blanditiis nisi reprehenderit unde aliquam, nostrum voluptatem dolorum explicabo molestias natus possimus autem magnam esse expedita quisquam itaque?"
+      }
+    },
+    {
+      "day after": {
+        "temperatureLimit": -15,
+        "chanceTo": {
+          "probability": 0.75,
+          "type": "snow",
+          "iconUrl": "./weatherAPI/snow.svg"
+        },
+        "imageUrl": "./weatherAPI/m3.jpg",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia impedit eaque fugiat blanditiis nisi reprehenderit unde aliquam, nostrum voluptatem dolorum explicabo molestias natus possimus autem magnam esse expedita quisquam itaque?"
+      }
+    },
+    {
+      "2 days after": {
+        "temperatureLimit": -5,
+        "chanceTo": {
+          "probability": 0.85,
+          "type": "snow",
+          "iconUrl": "./weatherAPI/snow.svg"
+        },
+        "imageUrl": "./weatherAPI/m1.jpg",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia impedit eaque fugiat blanditiis nisi reprehenderit unde aliquam, nostrum voluptatem dolorum explicabo molestias natus possimus autem magnam esse expedita quisquam itaque?"
+      }
+    },
+    {
+      "3 days after": {
+        "temperatureLimit": -20,
+        "chanceTo": {
+          "probability": 0.53,
+          "type": "snow",
+          "iconUrl": "./weatherAPI/snow.svg"
+        },
+        "imageUrl": "./weatherAPI/m2.jpg",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia impedit eaque fugiat blanditiis nisi reprehenderit unde aliquam, nostrum voluptatem dolorum explicabo molestias natus possimus autem magnam esse expedita quisquam itaque?"
+      }
+    },
+    {
+      "4 days after": {
+        "temperatureLimit": -15,
+        "chanceTo": {
+          "probability": 0.75,
+          "type": "snow",
+          "iconUrl": "./weatherAPI/snow.svg"
+        },
+        "imageUrl": "./weatherAPI/m3.jpg",
+        "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia impedit eaque fugiat blanditiis nisi reprehenderit unde aliquam, nostrum voluptatem dolorum explicabo molestias natus possimus autem magnam esse expedita quisquam itaque?"
+      }
+    }
+  ]
+}
