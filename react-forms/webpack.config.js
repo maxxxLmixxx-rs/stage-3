@@ -95,7 +95,7 @@ module.exports = {
   mode: mode.default,
   /*1*/ target: mode.isDevelopment ? 'web' : 'browserslist',
   /*2*/ entry: './src/index.tsx',
-  /*3*/ devtool: 'source-map',
+  /*3*/ devtool: mode.isDevelopment ? 'eval' : 'source-map',
   output: {
     publicPath: publicPath(),
     assetModuleFilename: filenames.assets,
