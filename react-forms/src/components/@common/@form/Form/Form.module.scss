@@ -1,0 +1,13 @@
+.Form {
+    display: grid;
+    gap: 30px;
+    & > * {
+        width: 100%;
+    }
+
+    .OneLine {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}

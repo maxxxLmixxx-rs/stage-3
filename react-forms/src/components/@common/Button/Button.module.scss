@@ -1,0 +1,60 @@
+@use 'sass:color';
+
+.Button {
+    $bg: #1b1f2a;
+    $tx: #f3f4f4;
+    $br: #adb1ff;
+    $ou: #9eceff;
+    $rd: 3px;
+
+    font-size: 18px;
+
+    all: unset;
+    width: min-content;
+    padding: 1em;
+    box-sizing: border-box;
+    white-space: nowrap;
+    color: $tx;
+    background: $bg;
+    border-radius: $rd;
+    border: 1px solid $br;
+    user-select: none;
+    transition-property: background, color;
+    transition-duration: 0.25s, 0.1s;
+
+    &:hover:not(:disabled) {
+        color: $bg;
+        cursor: pointer;
+        background: $br;
+    }
+
+    &:active:not(:disabled) {
+        background: color.adjust($br, $lightness: 5%);
+    }
+
+    &:disabled {
+        user-select: none;
+    }
+
+    &:focus-visible {
+        outline: 1px solid $ou;
+    }
+
+    &.notAllow:active {
+        $rotation: 4deg;
+        $iterations: 3;
+        $timing: $iterations * 0.05s;
+        animation: dribble $timing;
+        @keyframes dribble {
+            @for $per from 1 to $iterations {
+                #{$per * 1%} {
+                    @if $per % 2 == 0 {
+                        transform: rotate(-$rotation);
+                    } @else {
+                        transform: rotate(+$rotation);
+                    }
+                }
+            }
+        }
+    }
+}

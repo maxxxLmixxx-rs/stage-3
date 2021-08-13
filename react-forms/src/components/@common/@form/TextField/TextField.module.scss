@@ -1,0 +1,55 @@
+@use '../../../@styles' as s;
+
+.TextField {
+    $bg: s.$dark-m;
+    $tx: s.$light;
+    $br: s.$gray;
+    $ou: s.$blue;
+    $er: s.$danger;
+    $er-d: s.$danger-d;
+    $fz: s.$fz;
+    $rd: s.$br;
+    $pd: s.$pb s.$pi;
+
+    .labelGroup {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: $fz;
+        label {
+            cursor: pointer;
+            .label {
+                color: $tx;
+            }
+            .error {
+                color: $er;
+            }
+        }
+    }
+
+    input {
+        width: 100%;
+        padding: $pd;
+        box-sizing: border-box;
+        border: none;
+        color: $tx;
+        background: $bg;
+        font-size: $fz;
+        border-radius: $rd;
+        font-family: 'Open Sans';
+        border: 1px solid $br;
+
+        &:focus-visible {
+            border-color: $ou;
+            outline: none;
+        }
+
+        &.invalid,
+        &:invalid {
+            border-color: $er;
+            &:focus-visible {
+                border-color: $er-d;
+            }
+        }
+    }
+}

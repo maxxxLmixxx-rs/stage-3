@@ -1,5 +1,18 @@
 .App {
-    padding: 25px;
-    color: white;
-    font-size: 36px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-top: 120px;
+    display: grid;
+    justify-content: center;
+}
+
+.Cards {
+    height: 670px;
+    width: 100%;
+    padding: 50px;
+    display: grid;
+    align-content: start;
+    gap: 20px;
+    overflow: auto;
+    box-sizing: border-box;
 }

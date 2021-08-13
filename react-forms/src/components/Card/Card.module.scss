@@ -1,0 +1,61 @@
+@use 'sass:color';
+@use '../@styles' as s;
+
+.Card {
+    $bg: s.$dark-l;
+    $bg-s: s.$violet;
+    $tx: s.$light;
+    $br: s.$gray;
+    $rd: s.$br;
+    $fz: s.$fz;
+
+    padding: 20px;
+    height: min-content;
+    display: grid;
+    grid-auto-flow: column;
+    border-radius: $rd;
+    box-sizing: border-box;
+    font-family: 'Open Sans';
+    font-size: $fz;
+    color: $tx;
+    background: $bg;
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25);
+
+    display: grid;
+    grid-template-columns: 120px 1fr;
+
+    > * {
+        display: grid;
+        place-items: center;
+        box-sizing: border-box;
+
+        &:first-child {
+            .avatar {
+                display: grid;
+                place-items: center;
+                width: 90px;
+                height: 90px;
+                border-radius: 50%;
+                background: $bg-s;
+            }
+        }
+
+        &:last-child {
+            .name {
+                width: 100%;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                border-bottom: 1px dashed $br;
+                text-align: right;
+                color: $tx;
+            }
+            .info {
+                display: grid;
+                gap: 5px;
+                .field .label {
+                    color: $bg-s;
+                }
+            }
+        }
+    }
+}

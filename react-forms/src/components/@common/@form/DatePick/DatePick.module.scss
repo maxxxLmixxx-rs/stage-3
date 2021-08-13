@@ -1,0 +1,62 @@
+@use '../../../@styles' as s;
+
+.DatePick {
+    $bg: s.$dark-m;
+    $tx: s.$light;
+    $br: s.$gray;
+    $ou: s.$blue;
+    $er: s.$danger;
+    $er-d: s.$danger-d;
+    $fz: s.$fz;
+    $rd: s.$br;
+    $pd: s.$pb s.$pi;
+
+    .labelGroup {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        font-size: $fz;
+        label {
+            cursor: pointer;
+            .label {
+                color: $tx;
+            }
+            .error {
+                color: $er;
+            }
+        }
+    }
+
+    input {
+        min-width: 175px;
+        padding: $pd;
+        text-align: center;
+        box-sizing: border-box;
+        color: $tx;
+        background: $bg;
+        font-size: $fz;
+        font-family: 'Open Sans';
+        border-radius: $rd;
+        border: 1px solid $br;
+
+        &:focus-visible {
+            outline: none;
+            border-color: $ou;
+        }
+
+        &.invalid,
+        &:invalid {
+            border-color: $er;
+            &:focus-visible {
+                border-color: $er-d;
+            }
+        }
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+            margin: 0;
+        }
+    }
+}
