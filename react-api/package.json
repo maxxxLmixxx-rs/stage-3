@@ -5,7 +5,7 @@
   "repository": "https://github.com/maxxxLmixxx-rs/webpack-react.git",
   "author": "Shamal Maksim <max280599@gmail.com>",
   "license": "MIT",
-  "publicPath": "auto",
+  "publicPath": "https://maxxxlmixxx-rs.github.io/stage-3/react-api",
   "scripts": {
     "_env-prod": "cross-env NODE_ENV=production",
     "_env-dev": "cross-env NODE_ENV=development",
