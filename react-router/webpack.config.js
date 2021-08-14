@@ -8,6 +8,7 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const ReactRefreshBabelPlugin = require('react-refresh/babel')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const packageJSON = require('./package.json')
+const APlugin = require('a-webpack-plugin')
 
 /**
  * @1 .browserslist css-hot fix
@@ -27,23 +28,6 @@ const mode = {
 
 const isRefreshPlugin = () => {
   return no_server ? mode.isDevelopment && !no_server : false
-}
-
-const nameGeneratorStore = {
-  _store: {},
-  _count: 0,
-  _toLetters(num) {
-    let mod = num % 26
-    let pow = Math.floor(num / 26)
-    let out = mod ? String.fromCharCode(96 + mod) : (pow--, 'z')
-    return pow ? this._toLetters(pow) + out : out
-  },
-  generate(id) {
-    if (!this._store[id]) {
-      this._store[id] = this._toLetters(++this._count)
-    }
-    return this._store[id]
-  },
 }
 
 const filenames = {
@@ -67,12 +51,7 @@ const filenames = {
     return mode.isDevelopment ? '[path][name]__[local]' : undefined
   },
   get cssModulesProd() {
-    return mode.isProduction
-      ? (context, _, name) => {
-          const unique = context.resourcePath + name
-          return nameGeneratorStore.generate(unique)
-        }
-      : undefined
+    return APlugin.getClassName
   },
 }
 
@@ -94,7 +73,7 @@ const styles = {
 const publicPath = () =>
   packageJSON.publicPath !== 'auto' && mode.isProduction
     ? packageJSON.publicPath.replace(/\/$/, '') + '/'
-    : 'auto'
+    : '/'
 
 module.exports = {
   mode: mode.default,
@@ -110,11 +89,13 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     clientLogLevel: 'silent',
+    historyApiFallback: true,
     open: true,
     hot: true,
     port: 8080,
   },
   plugins: [
+    new APlugin(),
     new MiniCssExtractPlugin({
       filename: filenames.css,
     }),
