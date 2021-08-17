@@ -1,5 +1,47 @@
 .App {
-    padding: 25px;
-    color: white;
-    font-size: 36px;
+    min-height: 100vh;
+    padding: 0 50px;
+    min-width: 650px;
+    box-sizing: border-box;
+
+    .head {
+        margin: 0 auto;
+        max-width: 1600px;
+    }
+
+    .body {
+        margin: 0 auto;
+        max-width: 900px;
+    }
+}
+
+$animation-timing: 150ms;
+$move-y: 7px;
+
+@mixin transition {
+    transition-property: opacity, transform;
+    transition-duration: $animation-timing;
+    transition-timing-function: ease-in;
+}
+
+.AnimationRoute {
+    content: '';
+    &-enter {
+        opacity: 0.01;
+        transform: translate(0, -$move-y);
+    }
+    &-enter-active {
+        opacity: 1;
+        transform: translate(0, 0);
+        @include transition;
+    }
+    &-exit {
+        opacity: 1;
+        transform: translate(0, 0);
+    }
+    &-exit-active {
+        opacity: 0.01;
+        transform: translate(0, $move-y);
+        @include transition;
+    }
 }

@@ -1,0 +1,52 @@
+@use 'sass:math';
+@use '../../@styles' as s;
+
+.Header {
+    padding: 50px 0 0;
+    height: 70px;
+    font-size: s.$fz-lg;
+    color: s.$dark;
+
+    .list {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        gap: 40px;
+    }
+
+    .link {
+        text-decoration: none;
+        color: inherit;
+        display: grid;
+        justify-items: center;
+        gap: 10px;
+
+        $transition-timing: math.div(150 * 2, 1000) + s;
+
+        &.active {
+            pointer-events: none;
+            cursor: default;
+        }
+
+        &.active::after {
+            content: '';
+            display: block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: s.$coral;
+            animation: scale $transition-timing forwards;
+
+            @keyframes scale {
+                from {
+                    transform: scale(0);
+                }
+                to {
+                    transform: scale(1);
+                }
+            }
+        }
+    }
+}

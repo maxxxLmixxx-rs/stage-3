@@ -8,7 +8,6 @@ const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin'
 const ReactRefreshBabelPlugin = require('react-refresh/babel')
 const ESLintPlugin = require('eslint-webpack-plugin')
 const packageJSON = require('./package.json')
-const APlugin = require('a-webpack-plugin')
 
 /**
  * @1 .browserslist css-hot fix
@@ -28,6 +27,23 @@ const mode = {
 
 const isRefreshPlugin = () => {
   return no_server ? mode.isDevelopment && !no_server : false
+}
+
+const nameGeneratorStore = {
+  _store: {},
+  _count: 0,
+  _toLetters(num) {
+    let mod = num % 26
+    let pow = Math.floor(num / 26)
+    let out = mod ? String.fromCharCode(96 + mod) : (pow--, 'z')
+    return String(pow ? this._toLetters(pow) + out : out)
+  },
+  generate(id) {
+    return (
+      this._store[id] ||
+      (this._store[id] = this._toLetters(++this._count))
+    )
+  },
 }
 
 const filenames = {
@@ -51,7 +67,12 @@ const filenames = {
     return mode.isDevelopment ? '[path][name]__[local]' : undefined
   },
   get cssModulesProd() {
-    return APlugin.getClassName
+    return mode.isProduction
+      ? (context, _, name) => {
+          const unique = context.resourcePath + name
+          return nameGeneratorStore.generate(unique)
+        }
+      : undefined
   },
 }
 
@@ -95,7 +116,6 @@ module.exports = {
     port: 8080,
   },
   plugins: [
-    new APlugin(),
     new MiniCssExtractPlugin({
       filename: filenames.css,
     }),
