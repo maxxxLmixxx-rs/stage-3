@@ -1,0 +1,83 @@
+@use '../@styles' as s;
+
+.SmartSearch {
+    $pr: s.$dark;
+    $br: 30px;
+    $sh-1: 0px 0px 5px rgba(35, 35, 35, 0.25);
+    $sh-2: 0px 5px 5px rgba(35, 35, 35, 0.25);
+    $pd-i: 5%;
+
+    * {
+        box-sizing: border-box;
+    }
+
+    font-size: s.$fz-lg;
+    position: relative;
+
+    .extend {
+        display: none;
+        padding: 15px 50px 10px;
+        min-height: 170px;
+        width: 100%;
+        position: absolute;
+        box-sizing: border-box;
+        left: 0;
+        border-radius: 0 0 $br $br;
+        border: 1px solid $pr;
+        border-top: none;
+        background: s.$light;
+        &::after {
+            width: calc(100% - #{2 * $pd-i});
+            background: s.$dark;
+            opacity: 0.3;
+            content: '';
+            height: 1px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    &.expanded {
+        .shell {
+            border-radius: $br $br 0 0;
+            box-shadow: $sh-1;
+        }
+        .extend {
+            display: grid;
+            box-shadow: $sh-2;
+            overflow: hidden;
+        }
+    }
+
+    .shell {
+        border-radius: $br;
+        border: 1px solid $pr;
+        .searchBar {
+            position: relative;
+            input {
+                border-radius: $br;
+                width: 100%;
+                padding: 0 $pd-i;
+                line-height: 65px;
+                width: 100%;
+                border: none;
+                font-size: inherit;
+
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+            .magnifier {
+                position: absolute;
+                right: $pd-i;
+                top: 15px;
+                pointer-events: none;
+            }
+        }
+        &:hover {
+            box-shadow: $sh-1;
+        }
+    }
+}
