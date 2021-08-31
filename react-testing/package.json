@@ -16,7 +16,10 @@
     "build-dev": "npm run _env-dev-build webpack",
     "lint": "eslint src && echo \"No linting errors\"",
     "lint:fix": "eslint src --fix",
-    "prettify": "prettier --write src"
+    "prettify": "prettier --write src",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest watch"
   },
   "devDependencies": {
     "@babel/core": "^7.14.8",
@@ -26,6 +29,7 @@
     "@babel/preset-typescript": "^7.14.5",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@svgr/webpack": "^5.5.0",
+    "@testing-library/react": "^12.0.0",
     "@typescript-eslint/eslint-plugin": "^4.28.5",
     "@typescript-eslint/parser": "^4.28.5",
     "babel-loader": "^8.2.2",
@@ -43,6 +47,7 @@
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-webpack-plugin": "^3.0.1",
     "html-webpack-plugin": "^5.3.2",
+    "jest": "^27.1.0",
     "mini-css-extract-plugin": "^2.1.0",
     "postcss": "^8.3.6",
     "postcss-loader": "^6.1.1",
