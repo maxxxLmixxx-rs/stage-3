@@ -1,6 +1,8 @@
 import React from 'react'
 import { HashRouter, Route, Switch, useLocation } from 'react-router-dom'
 import { SwitchTransition, CSSTransition } from 'react-transition-group'
+import { Provider } from 'react-redux'
+import store from './store'
 import s from './App.scss'
 import Home from './components/@pages/Home/Home'
 import NotFound from './components/@pages/NotFound/NotFound'
@@ -69,8 +71,10 @@ const AppComponent: React.FC = () => {
 
 export default function App(): JSX.Element {
     return (
-        <HashRouter>
-            <AppComponent />
-        </HashRouter>
+        <Provider store={store}>
+            <HashRouter>
+                <AppComponent />
+            </HashRouter>
+        </Provider>
     )
 }

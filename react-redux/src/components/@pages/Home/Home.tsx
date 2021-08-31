@@ -1,43 +1,25 @@
-import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import s from './Home.module.scss'
 import classnames from '../../../utils/classnames'
 import SmartSearch from './SmartSearch/SmartSearch'
-import OpenLibrary, { SortParams } from '../../../API/openLibrary.org'
-import { BookTitle } from '../../../API/openLibrary.org/parsers/search'
 import RoundButton from '../../@common/RoundButton/RoundButton'
 import BookList from './BookList/BookList'
+import { RootState } from '../../../store'
+import {
+    changeSearchValue,
+    changePage,
+    changeSort,
+} from '../../../store/homeSearchSlice'
 
 const cx = classnames.bind(s)
 
 const Home: React.FC = () => {
-    const [limit] = useState(5)
-    const [maxPages, setMaxPages] = useState<number | null>(null)
-    const [page, setPage] = useState(1)
-    const [sort, setSort] = useState<SortParams>('editions')
-    const [searchValue, setSearchValue] = useState('')
-
-    const [searchResult, setSearchResult] = useState<BookTitle[]>([])
-    const [isFetching, setIsFetching] = useState(true)
-
-    useEffect(() => {
-        if (searchValue) {
-            setIsFetching(true)
-            const searchParams = { value: searchValue, limit, page, sort }
-            OpenLibrary.abortPrevious()
-                .search(searchParams)
-                .then(({ maxBooks, books }) => {
-                    setMaxPages(Math.floor(maxBooks / limit) - 1)
-                    setSearchResult(books)
-                    setIsFetching(false)
-                })
-                .catch(OpenLibrary.skipAbort(console.error))
-        }
-    }, [page, limit, sort, searchValue])
-
-    useEffect(() => {
-        setMaxPages(null)
-        setPage(1)
-    }, [limit, sort, searchValue])
+    const dispatch = useDispatch()
+    const {
+        isFetching,
+        bookTitles,
+        search: { page, sort, maxPages, value: searchValue },
+    } = useSelector((state: RootState) => state.homeSearch)
 
     return (
         <div className={cx('Home')}>
@@ -50,35 +32,35 @@ const Home: React.FC = () => {
                     placeholder="Search"
                     value={searchValue}
                     onChange={({ currentTarget: { value } }) => {
-                        setSearchValue(value)
+                        dispatch(changeSearchValue(value))
                     }}
                     onExpand={
                         <BookList
                             showPagination={!!searchValue}
-                            books={searchResult}
+                            books={bookTitles}
                             isFetching={isFetching}
                             maxPages={maxPages}
                             page={page}
-                            setPage={setPage}
+                            setPage={(p) => dispatch(changePage(p))}
                         />
                     }
                 />
                 <div className={cx('controls')}>
                     <RoundButton
                         active={sort === 'editions'}
-                        onClick={() => setSort('editions')}
+                        onClick={() => dispatch(changeSort('editions'))}
                     >
                         Most Editions
                     </RoundButton>
                     <RoundButton
                         active={sort === 'old'}
-                        onClick={() => setSort('old')}
+                        onClick={() => dispatch(changeSort('old'))}
                     >
                         First Published
                     </RoundButton>
                     <RoundButton
                         active={sort === 'new'}
-                        onClick={() => setSort('new')}
+                        onClick={() => dispatch(changeSort('new'))}
                     >
                         Most Recent
                     </RoundButton>

@@ -1,12 +1,16 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
 import s from './Details.module.scss'
 import classnames from '../../../utils/classnames'
-import OpenLibrary from '../../../API/openLibrary.org'
-import useMultipleFetching from '../../../hooks/useMultipleFetching'
 import Loader from '../../@common/Loader/Loader'
-import { Book } from '../../../API/openLibrary.org/parsers/book'
 import BookSvg from './book.svg'
+import { RootState } from '../../../store'
+import {
+    fetchBookDetails,
+    toggleCoverFetching,
+    toggleExpand,
+} from '../../../store/bookDetailsSlice'
 
 const cx = classnames.bind(s)
 
@@ -97,34 +101,28 @@ const Conditional: React.FC<{ if: unknown }> = (props) => {
 }
 
 const Details: React.FC = () => {
+    const dispatch = useDispatch()
     const { params } = useRouteMatch<{ bookId: string }>()
     const { bookId } = params
-    const [book, setBook] = useState<Book>()
-    const [expand, setExpand] = useState(false)
-    const [isFetching, setFetching] = useMultipleFetching({
-        book: true,
-        image: true,
-    })
+    const bookDetails = useSelector((state: RootState) => state.bookDetails)
+    const { book, isBookFetching, isCoverFetching, isExpanded } = bookDetails
     const coverLink = (book?.coverLinks && book.coverLinks[0]) || ''
 
     useEffect(() => {
-        OpenLibrary.book(bookId).then((data) => {
-            setFetching('book')(false)
-            setBook(data)
-        })
-    }, [bookId, setFetching])
+        dispatch(fetchBookDetails(bookId))
+    }, [bookId, dispatch])
 
     return (
-        <div className={cx('Details', { loader: isFetching.book })}>
-            <Loader show={isFetching.book} />
-            {!isFetching.book && (
+        <div className={cx('Details', { loader: isBookFetching })}>
+            <Loader show={isBookFetching} />
+            {!isBookFetching && (
                 <div className={cx('container')}>
                     <div className={cx('left')}>
                         <BookCover
                             src={coverLink}
-                            loading={isFetching.image}
+                            loading={isCoverFetching}
                             noImage={book && !coverLink}
-                            onLoad={() => setFetching('image')(false)}
+                            onLoad={() => dispatch(toggleCoverFetching(false))}
                         />
                     </div>
                     <div className={cx('right')}>
@@ -133,7 +131,7 @@ const Details: React.FC = () => {
                                 <h2 className={cx('title')}>{book?.title}</h2>
                                 <Conditional if={book?.authors}>
                                     <h3 className={cx('authors')}>
-                                        {book?.authors.join(', ')}
+                                        {book?.authors?.join(', ')}
                                     </h3>
                                 </Conditional>
                                 <Conditional if={book?.publish}>
@@ -145,8 +143,10 @@ const Details: React.FC = () => {
                             <div className={cx('body')}>
                                 <Conditional if={book?.description}>
                                     <Expandable
-                                        onExpand={() => setExpand((p) => !p)}
-                                        expand={expand}
+                                        onExpand={() =>
+                                            dispatch(toggleExpand())
+                                        }
+                                        expand={isExpanded}
                                     >
                                         {book?.description || ''}
                                     </Expandable>
