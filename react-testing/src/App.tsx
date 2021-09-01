@@ -43,25 +43,23 @@ const AppComponent: React.FC = () => {
                         unmountOnExit
                         mountOnEnter
                     >
-                        <div className={cx('AnimationRoute')}>
-                            <Switch location={location}>
-                                <Route
-                                    exact
-                                    path={Link.route('home')}
-                                    component={Home}
-                                />
-                                <Route
-                                    exact
-                                    path={Link.route('about')}
-                                    component={About}
-                                />
-                                <Route
-                                    path={Link.route('details')}
-                                    component={Details}
-                                />
-                                <Route path="*" component={NotFound} />
-                            </Switch>
-                        </div>
+                        <Switch location={location}>
+                            <Route
+                                exact
+                                path={Link.route('home')}
+                                component={Home}
+                            />
+                            <Route
+                                exact
+                                path={Link.route('about')}
+                                component={About}
+                            />
+                            <Route
+                                path={Link.route('details')}
+                                component={Details}
+                            />
+                            <Route path="*" component={NotFound} />
+                        </Switch>
                     </CSSTransition>
                 </SwitchTransition>
             </div>

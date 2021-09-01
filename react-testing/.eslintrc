@@ -28,6 +28,22 @@
     "react-hooks",
     "@typescript-eslint"
   ],
+  "overrides": [
+    {
+      "files": [
+        "setupTests.ts",
+        "**/*.test.js",
+        "**/*.test.ts",
+        "**/*.test.jsx",
+        "**/*.test.tsx",
+        "**/tests/utils/**/*.ts",
+        "**/tests/utils/**/*.tsx"
+      ],
+      "rules": {
+        "import/no-extraneous-dependencies": "off"
+      }
+    }
+  ],
   "rules": {
     "no-console": [
       "error",
