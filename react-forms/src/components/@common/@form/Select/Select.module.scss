@@ -1,0 +1,50 @@
+@use '../../../@styles' as s;
+
+.Select {
+    $bg: s.$dark-m;
+    $tx: s.$light;
+    $br: s.$gray;
+    $ou: s.$blue;
+    $fz: s.$fz;
+    $rd: s.$br;
+    $pd: s.$pb s.$pi;
+
+    position: relative;
+
+    span {
+        display: block;
+        font-size: $fz;
+        margin-bottom: 10px;
+    }
+
+    select,
+    option {
+        color: $tx;
+        background: $bg;
+    }
+
+    select {
+        all: unset;
+        width: 100%;
+        padding: $pd;
+        padding-right: 50px;
+        box-sizing: border-box;
+        font-size: $fz;
+        border: 1px solid $br;
+        &:focus-visible {
+            outline: none;
+            border-color: $ou;
+        }
+    }
+
+    .icon {
+        content: '';
+        height: 15px;
+        width: 15px;
+        display: block;
+        position: absolute;
+        right: 15px;
+        bottom: 5px;
+        background: center / contain no-repeat url('./arrow.svg');
+    }
+}

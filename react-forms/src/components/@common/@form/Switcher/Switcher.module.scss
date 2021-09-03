@@ -1,0 +1,71 @@
+@use 'sass:color';
+@use '../../../@styles' as s;
+
+.Switcher {
+    $bg: s.$gray;
+    $tx: s.$light;
+    $br: s.$violet;
+    $ou: s.$blue;
+    $fz: s.$fz;
+    $rd: s.$br;
+
+    $h: 25px;
+    $w: 60px;
+
+    display: flex;
+    gap: 10px;
+    font-size: $fz;
+
+    input {
+        all: unset;
+        -webkit-appearance: none;
+        height: $h;
+        width: $w;
+        cursor: pointer;
+        position: relative;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            display: block;
+            transition-property: transform, background, box-shadow;
+            transition-duration: 0.3s;
+        }
+
+        &::before {
+            $lf: 2px;
+            width: $w - $lf * 2;
+            height: 50%;
+            left: $lf;
+            top: 50%;
+            transform: translateY(-50%);
+            background: $bg;
+            border-radius: 2px;
+        }
+
+        &::after {
+            height: $h;
+            width: $h;
+            top: 0;
+            border-radius: 50%;
+            background: $br;
+        }
+
+        &:focus-visible {
+            outline: 1px solid $ou;
+        }
+    }
+
+    &.checked {
+        input {
+            &::before {
+                background: color.adjust($br, $alpha: -0.15);
+            }
+            &::after {
+                transform: translateX($w - $h);
+                box-shadow: 0 0 3px 3px color.adjust($ou, $alpha: -0.9);
+            }
+        }
+    }
+}

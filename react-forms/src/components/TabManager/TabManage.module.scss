@@ -1,0 +1,73 @@
+@use 'sass:color';
+
+.TabManager {
+    $bg: #1a202a;
+    $tx: #f3f4f4;
+    $ac: #adb1ff;
+    $ou: #9eceff;
+    $tm: 0.3s;
+    $fu: ease;
+    $rd: 3px;
+    color: $tx;
+
+    width: 500px;
+    display: grid;
+    box-sizing: border-box;
+
+    & > * {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .header {
+        display: grid;
+        gap: 15px;
+        grid-auto-flow: column;
+        justify-content: start;
+        .title {
+            all: unset;
+            min-width: 150px;
+            padding: 10px;
+            text-align: center;
+            background: $bg;
+            border-radius: $rd $rd 0 0;
+            border-top: 5px solid transparent;
+            cursor: pointer;
+            transition: border $tm $fu;
+            &:hover {
+                background: color.adjust($bg, $lightness: 10%);
+            }
+            &:focus-visible {
+                background: color.mix($bg, $ou);
+            }
+            &.active {
+                border-color: $ac;
+                cursor: default;
+                &:hover {
+                    background: $bg;
+                }
+                &:focus-visible {
+                    background: color.mix($bg, $ou);
+                }
+            }
+        }
+    }
+
+    .body {
+        background: $bg;
+        border-radius: 0 $rd $rd $rd;
+        overflow: hidden;
+        .moveGroup {
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-columns: 100% 100%;
+            transition: transform $tm $fu;
+            > * {
+                padding: 50px;
+            }
+            .noPadding {
+                padding: 0;
+            }
+        }
+    }
+}

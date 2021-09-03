@@ -1,0 +1,61 @@
+@use '../../../@styles' as s;
+
+.Checkbox {
+    $bg: s.$dark-m;
+    $tx: s.$light;
+    $ac: s.$violet;
+    $ou: s.$blue;
+    $er: s.$danger;
+    $er-d: s.$danger-d;
+    $fz: s.$fz;
+    $rd: s.$br;
+
+    display: flex;
+    gap: 20px;
+    font-size: $fz;
+    width: max-content;
+
+    input {
+        all: unset;
+        height: 25px;
+        width: 25px;
+        box-sizing: border-box;
+        display: grid;
+        place-items: center;
+        font-size: $fz;
+        border-radius: $rd;
+        border: 1px solid $ac;
+        background: $bg;
+        cursor: pointer;
+
+        &::after {
+            content: '';
+            height: 100%;
+            width: 100%;
+            display: block;
+            transition: background-color 0.2s ease;
+        }
+
+        &:focus-visible {
+            outline: none;
+            border-width: 2px;
+            border-color: $ou;
+        }
+
+        &:checked {
+            border-color: $ac;
+        }
+
+        &:checked::after {
+            background: center / 80% auto no-repeat url('./checked.svg');
+            background-color: $bg;
+        }
+
+        &.error {
+            border-color: $er;
+            &:focus-visible {
+                border-color: $er-d;
+            }
+        }
+    }
+}
