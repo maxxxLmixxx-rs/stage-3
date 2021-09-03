@@ -1,0 +1,53 @@
+@use 'sass:color';
+
+$txt-bl: #55a7ff;
+$txt-wh: #ffffff;
+$txt-vi: #991111;
+
+$bg-dark: #0d253d;
+$bg-dark-grad: linear-gradient(to bottom, transparent 0 35px, $bg-dark 150px);
+
+.WeatherCard {
+    width: 300px;
+    color: $txt-wh;
+    box-sizing: border-box;
+    background: center -150px / 100% auto no-repeat $bg-dark;
+    font-weight: lighter;
+    transition: background-position 0.5s ease;
+    border: 1px solid color.adjust($txt-bl, $alpha: -0.95);
+
+    &:hover {
+        background-position: center -140px;
+    }
+
+    .weatherData {
+        margin-top: 200px;
+        padding: 100px 20px 10px;
+        background: $bg-dark-grad;
+
+        & > * {
+            margin: 10px 0;
+        }
+    }
+
+    .heading {
+        display: flex;
+        justify-content: space-between;
+    }
+    .day {
+        color: $txt-bl;
+        display: block;
+        font-size: 24px;
+        &::first-letter {
+            text-transform: uppercase;
+        }
+    }
+    .temperatureLimit {
+        color: $txt-vi;
+        font-size: 20px;
+        font-weight: normal;
+    }
+    .description {
+        font-size: 14px;
+    }
+}
