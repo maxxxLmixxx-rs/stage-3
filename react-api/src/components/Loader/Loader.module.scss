@@ -1,0 +1,10 @@
+@use '../@styles' as s;
+
+.Loader {
+    display: grid;
+    align-content: center;
+
+    &.fullHeight {
+        height: 100%;
+    }
+}
