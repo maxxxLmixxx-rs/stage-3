@@ -5,7 +5,7 @@ import { RootState } from '.'
 import OpenLibrary, { SortParams } from '../API/openLibrary.org'
 import { BookTitle } from '../API/openLibrary.org/parsers/search'
 
-type SearchObject = {
+export type SearchObject = {
     limit: number
     page: number
     maxPages: null | number
@@ -34,7 +34,7 @@ const searchBooks = createAsyncThunk(
 )
 
 export const changeSearchValue = createAsyncThunk(
-    'homeSearch/searchBooks',
+    'homeSearch/changeSearchValue',
     (value: string, { dispatch }) => {
         dispatch(setSearchValue(value))
         dispatch(searchBooks(value))

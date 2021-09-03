@@ -15,14 +15,16 @@ export const fetchBookDetails = createAsyncThunk(
     }
 )
 
+export const initialState = {
+    isCoverFetching: true,
+    isBookFetching: true,
+    isExpanded: false,
+    book: {} as Book,
+}
+
 const bookDetailsSlice = createSlice({
     name: 'bookDetails',
-    initialState: {
-        isCoverFetching: true,
-        isBookFetching: true,
-        isExpanded: false,
-        book: {} as Book,
-    },
+    initialState,
     reducers: {
         setBookDetails: (state, action: PayloadAction<Book>) => {
             state.book = action.payload

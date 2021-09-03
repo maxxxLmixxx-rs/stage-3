@@ -3,11 +3,12 @@ import homeSearch from './homeSearchSlice'
 import bookDetails from './bookDetailsSlice'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
+export const reducer = {
+    homeSearch,
+    bookDetails,
+}
 const store = configureStore({
-    reducer: {
-        homeSearch,
-        bookDetails,
-    },
+    reducer,
     devTools: isDevelopment,
 })
 

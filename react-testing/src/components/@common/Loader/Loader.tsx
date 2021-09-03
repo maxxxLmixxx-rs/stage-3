@@ -1,8 +1,8 @@
 import s from './Loader.module.scss'
-import l from './ExternalLoader.scss'
+import l from './ExternalLoader.module.scss'
 import classnames from '../../../utils/classnames'
 
-const cx = classnames.bind({ ...s, ...l })
+const cx = classnames.bind(Object.assign(s, l))
 
 type LoaderProps = {
     fullHeight?: boolean

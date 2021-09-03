@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { ReactEventHandler, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useRouteMatch } from 'react-router-dom'
 import s from './Details.module.scss'
@@ -18,24 +18,20 @@ type BookCoverProps = {
     src: string
     noImage?: boolean
     loading?: boolean
-    onLoad?: (e: Event) => void
+    onLoad?: ReactEventHandler<HTMLImageElement>
 }
 
-const BookCover: React.FC<BookCoverProps> = (props) => {
+export const BookCover: React.FC<BookCoverProps> = (props) => {
     const { src, loading = false, noImage = false, onLoad = () => null } = props
 
-    const onLoadRef = useRef<typeof onLoad>(onLoad)
-    onLoadRef.current = onLoad
-
-    useEffect(() => {
-        if (!src) return
-        const image = new Image()
-        image.src = src
-        image.addEventListener('load', onLoadRef.current, { once: true })
-    }, [src])
-
     const ImageCover = (
-        <img className={cx('imageCover')} src={src} alt="book cover" />
+        <img
+            className={cx('imageCover')}
+            style={{ display: loading ? 'none' : 'initial' }}
+            src={src}
+            onLoad={onLoad}
+            alt="book cover"
+        />
     )
     const NoImage = (
         <div className={cx('placeholder')}>
@@ -43,26 +39,32 @@ const BookCover: React.FC<BookCoverProps> = (props) => {
             <span>No image</span>
         </div>
     )
+    const LoadingState = (
+        <>
+            {ImageCover}
+            <Loader />
+        </>
+    )
 
     return (
         <div className={cx('bookCover', { noImage })}>
             {(() => {
                 if (noImage) return NoImage
-                if (loading) return <Loader />
+                if (loading) return LoadingState
                 return ImageCover
             })()}
         </div>
     )
 }
 
-type ExpandableProps = {
+type ExpandableTextProps = {
     maxSymbols?: number
     expand?: boolean
     children: string
-    onExpand?: (is: boolean) => void
+    onExpand?: (will: boolean) => void
 }
 
-const Expandable: React.FC<ExpandableProps> = (props) => {
+export const ExpandableText: React.FC<ExpandableTextProps> = (props) => {
     const {
         onExpand = () => null,
         expand = false,
@@ -80,7 +82,7 @@ const Expandable: React.FC<ExpandableProps> = (props) => {
                 <button
                     className={cx('button')}
                     type="button"
-                    onClick={() => onExpand(expand)}
+                    onClick={() => onExpand(!expand)}
                 >
                     ...
                 </button>
@@ -89,7 +91,7 @@ const Expandable: React.FC<ExpandableProps> = (props) => {
     }
 
     return (
-        <div className={cx('Expandable')}>
+        <div className={cx('ExpandableText')}>
             {isInteractive ? Interactive() : children}
         </div>
     )
@@ -142,14 +144,14 @@ const Details: React.FC = () => {
                             </div>
                             <div className={cx('body')}>
                                 <Conditional if={book?.description}>
-                                    <Expandable
+                                    <ExpandableText
                                         onExpand={() =>
                                             dispatch(toggleExpand())
                                         }
                                         expand={isExpanded}
                                     >
                                         {book?.description || ''}
-                                    </Expandable>
+                                    </ExpandableText>
                                 </Conditional>
                             </div>
                         </div>

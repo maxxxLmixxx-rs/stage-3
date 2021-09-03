@@ -39,7 +39,7 @@ const BookList: React.FC<IBookList> = (props) => {
             <div className={cx('main')}>
                 {(() => {
                     if (isFetching) {
-                        return <Loader show={isFetching} fullHeight />
+                        return <Loader fullHeight />
                     }
                     if (books.length) {
                         return <div className={cx('list')}>{Books}</div>

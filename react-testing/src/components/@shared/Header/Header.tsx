@@ -28,7 +28,7 @@ const Header: React.FC = () => {
     ]
 
     return (
-        <div className={cx('Header')}>
+        <nav className={cx('Header')}>
             <ul className={cx('list')}>
                 {linksArray.map(({ href, title }, ix) => (
                     <Li key={ix} href={href}>
@@ -36,7 +36,7 @@ const Header: React.FC = () => {
                     </Li>
                 ))}
             </ul>
-        </div>
+        </nav>
     )
 }
 
