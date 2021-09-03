@@ -1,0 +1,89 @@
+@use 'sass:color';
+@use '../../@styles' as s;
+
+.Details {
+    $br: color.adjust(s.$dark, $alpha: -0.8);
+    $im: 210px;
+
+    padding: 150px 0;
+    font-size: s.$fz-sm;
+    display: grid;
+    place-items: center;
+
+    .container {
+        width: 100%;
+        display: grid;
+        gap: 60px;
+        grid-template-columns: $im 1fr;
+        grid-auto-flow: column;
+    }
+
+    .bookCover {
+        display: grid;
+        place-content: center;
+        .imageCover {
+            width: $im;
+            border: 1px solid $br;
+        }
+
+        &.noImage {
+            height: 100%;
+            text-align: center;
+            user-select: none;
+            .placeholder {
+                display: grid;
+                gap: 15px;
+                font-size: 14px;
+            }
+        }
+    }
+
+    .bookAbout {
+        font-weight: 300;
+        .head {
+            display: block;
+            margin-bottom: 40px;
+        }
+
+        .authors,
+        .title {
+            font-weight: inherit;
+            margin: 0;
+            padding: 0;
+        }
+
+        .title {
+            color: black;
+            padding: 0 50px 5px 0;
+            margin-bottom: 20px;
+            font-size: 32px;
+            border-bottom: 1px solid $br;
+        }
+        .authors {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+        .publish {
+            font-size: 16px;
+        }
+    }
+}
+
+.ExpandableText {
+    font-size: 18px;
+    line-height: 1.7;
+    .button {
+        all: unset;
+        padding: 5px 10px;
+        line-height: 1;
+        border-radius: s.$br-sm;
+        border: 1px solid s.$dark;
+        cursor: pointer;
+        user-select: none;
+        &:hover {
+            background: s.$gray;
+        }
+    }
+}
